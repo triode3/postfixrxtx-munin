@@ -1,0 +1,40 @@
+#!/bin/sh
+# -*- sh -*-
+
+set -e
+
+#
+case $1 in 
+    config)
+        cat <<'EOM'
+graph_title Postfix Mail Sent and Received, last 5 minutes
+graph_category mail
+graph_vlabel Email
+received.label received email
+received.info  email received in last 5 minutes
+delivered.label delivered email
+delivered.info email delivered in last 5 minutes
+rejected.label rejected email
+rejected.info all others in last 5 minutes
+EOM
+    exit 0;;
+esac
+#
+# Set the starting time to be 5 mins ago with date:
+#
+ST=$(date -d "5 minutes ago" +"%b %_d %H:%M")
+#
+# grep for sent in the maillog since ST:
+#
+sent=$(grep "status=sent" /var/log/maillog | awk -v d1="$ST" '$0 > d1' | wc -l)
+echo "delivered.value " $sent
+#
+# grep for received in the maillog since ST:
+#
+received=$(grep "postfix/smtpd" /var/log/maillog |awk -v d1="$ST" '$0 > d1' |grep "connect from" |grep -v "disconnect" |wc -l)
+echo "received.value " $received
+#
+# grep for mail that was rejected/bounced/no-relay in the mail log since ST:
+# 
+rejected=$(grep "postfix/smtpd" /var/log/maillog |awk -v d1="$ST" '$0 > d1' |grep reject |wc -l)
+echo "rejected.value " $rejected
