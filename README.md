@@ -19,8 +19,8 @@ We have an HPC cluster and all emails go through a single gateway. While there a
 
 It is a plugin just like any munin plugin, so you need to do the following:
 
-- place the postfixrxtx file into /usr/share/munin/plugins (or if you moved it, the munin plugin dir)
-- create a link from /etc/munin/plugins/postfixrxtx to /usr/share/munin/plugins/postfixrxtx
+- place the postfix_mailrxtx file into /usr/share/munin/plugins (or if you moved it, the munin plugin dir)
+- create a link from /etc/munin/plugins/postfix_mailrxtx to /usr/share/munin/plugins/postfix_mailrxtx
 - restart munin-node
 - restart munin (if you want to). 
 
