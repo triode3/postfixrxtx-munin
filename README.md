@@ -10,7 +10,6 @@ This readme assumes you know what [Munin](https://munin-monitoring.org/) is all 
 Here is an exmaple output from munin monitoring only received and delivered mail. The plugin will also monitor rejected, but we decided to leave it out on our system, as we get a lot of rejects.
 
 ![screenshot of postfixrxtx-munin from a node](https://github.com/triode3/postfixrxtx-munin/blob/main/images/postfixrxtx-munin.png)
---->
 
 # Why did I make this?
 
